@@ -50,6 +50,7 @@ class AddProductListViewModel with ChangeNotifier {
       notifyListeners();
     } catch (e) {
       _status = Status.AddFailed;
+      ///     [][][][][][][][][][][][]  هنا بطبع اي ايرور يحصل معايا علشان اعرف المشكله
       print('--*-*-*-*-*-*-*-*-*-*-*-*--$e--*-*-*-*-*-*-*-*-*-*-*-*--');
       log(e.toString());
     }
