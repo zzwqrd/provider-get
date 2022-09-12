@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mvvm_provider_practice/helper/btn.dart';
+import 'package:mvvm_provider_practice/view/add_product.dart';
 import 'package:mvvm_provider_practice/view_model/prodact_model.dart';
 import 'package:provider/provider.dart';
 
@@ -46,6 +48,13 @@ class _ProductState extends State<Product> {
                       );
                     },
                   ),
+            floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+            floatingActionButton: Btn(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AddProducts()));
+              },
+              txt: 'Add Products',
+            ),
           );
         },
       ),

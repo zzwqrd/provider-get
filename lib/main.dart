@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mvvm_provider_practice/view/product.dart';
+import 'package:mvvm_provider_practice/view_model/add_pr_model.dart';
 import 'package:mvvm_provider_practice/view_model/prodact_model.dart';
 import 'package:provider/provider.dart';
 
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: ProductListViewModel()),
+        ChangeNotifierProvider.value(value: AddProductListViewModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
