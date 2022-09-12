@@ -24,6 +24,7 @@ class _ProductState extends State<Product> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ProductListViewModel>(
+      lazy: true,
       create: (BuildContext context) => _productListViewModel,
       child: Consumer<ProductListViewModel>(
         builder: (context, postListViewModel, child) {
@@ -40,11 +41,19 @@ class _ProductState extends State<Product> {
                     shrinkWrap: true,
                     itemCount: postListViewModel.list.length,
                     itemBuilder: (context, i) {
-                      return Column(
-                        children: [
-                          Image.network(postListViewModel.list[i].image),
-                          Text("${postListViewModel.list[i].name}"),
-                        ],
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Image.network(
+                              postListViewModel.list[i].image,
+                              width: 120,
+                              height: 100,
+                              fit: BoxFit.fill,
+                            ),
+                            Text("${postListViewModel.list[i].name}"),
+                          ],
+                        ),
                       );
                     },
                   ),

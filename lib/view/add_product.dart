@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mvvm_provider_practice/helper/btn.dart';
@@ -53,6 +54,7 @@ class _AddProductsState extends State<AddProducts> {
 
   @override
   Widget build(BuildContext context) {
+    AddProductListViewModel addProductListViewModel = Provider.of<AddProductListViewModel>(context);
     return Scaffold(
       appBar: AppBar(),
       body: Form(
@@ -205,37 +207,44 @@ class _AddProductsState extends State<AddProducts> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Btn(
-        onTap: () {
-          setState(() {
-            if (image == null) {
-              print(".........image...image...image..................");
-            } else {
-              if (!formKey.currentState!.validate()) {
-                print(".........validate...validate...validate..................");
-                return;
-              } else {
-                formKey.currentState!.save();
-                _addProductListViewModel = Provider.of<AddProductListViewModel>(context, listen: false);
-                _addProductListViewModel.getData(
-                  image: image,
-                  nameController: nameController,
-                  descriptionController: descriptionController,
-                  discountController: discountController,
-                  priceController: priceController,
-                );
-                print(".........getData...getData...getData..................");
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => Product()),
-                  (Route<dynamic> route) => false,
-                );
-              }
-            }
-          });
-        },
-        txt: 'Add Products',
-      ),
+      floatingActionButton: addProductListViewModel.status == Status.AddStart
+          ? const Center(
+              child: CupertinoActivityIndicator(
+                animating: true,
+                radius: 15,
+              ),
+            )
+          : Btn(
+              onTap: () {
+                setState(() {
+                  if (image == null) {
+                    print(".........image...image...image..................");
+                  } else {
+                    if (!formKey.currentState!.validate()) {
+                      print(".........validate...validate...validate..................");
+                      return;
+                    } else {
+                      formKey.currentState!.save();
+                      _addProductListViewModel = Provider.of<AddProductListViewModel>(context, listen: false);
+                      _addProductListViewModel.getData(
+                        image: image,
+                        nameController: nameController,
+                        descriptionController: descriptionController,
+                        discountController: discountController,
+                        priceController: priceController,
+                      );
+                      print(".........getData...getData...getData..................");
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => Product()),
+                        (Route<dynamic> route) => false,
+                      );
+                    }
+                  }
+                });
+              },
+              txt: 'Add Products',
+            ),
     );
   }
 }
