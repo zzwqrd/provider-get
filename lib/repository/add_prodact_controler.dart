@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:mvvm_provider_practice/helper/server_gate.dart';
-import 'package:mvvm_provider_practice/model/model.dart';
 import 'package:mvvm_provider_practice/model/model_add.dart';
 
 class ApiAddProducts {
@@ -44,7 +43,7 @@ class ApiAddProducts {
 
         ///     [][][][][][][] اما هنا فا بحول الصوره معايا علشان اعرف ابعتها ودا كود التحويل بتعها وهنا مش هينفع اي هبد خصوصا في تحويل الصوره
         if (image != null)
-          "image": MultipartFile.fromFileSync(image!.path, filename: image!.path.split('/').last.toString(), contentType: MediaType("image", "png")),
+          "image": MultipartFile.fromFileSync(image.path, filename: image.path.split('/').last.toString(), contentType: MediaType("image", "png")),
       },
     );
     model = ProductsStoreModel.fromJson(response.response!.data);
