@@ -17,7 +17,7 @@ class _ProductState extends State<Product> {
   void initState() {
     _productListViewModel = Provider.of<ProductListViewModel>(context, listen: false);
     _productListViewModel.getData();
-    // TODO: implement initState
+
     super.initState();
   }
 
